@@ -1,0 +1,39 @@
+<h1> Blog </h1>
+
+<%= for post <- @posts do %>
+  <div id={"post-#{post.id}"}>
+    <h2>
+      <%= live_redirect post.title, to: Routes.blog_path(@socket, :show, post.id) %>
+    </h2>
+
+    <div>
+      <small>
+        <em>by</em>
+        <%= link to: "https://twitter.com/herminiotorres" do %>
+          <strong><%= post.author %></strong>
+        <% end %>
+        |
+        <em>Published on</em> <strong><%= Date.to_iso8601(post.date) %></strong> |
+        <em>Time</em> <strong><%= post.reading_time %>m read</strong>
+      </small>
+
+      <%= if Enum.any?(post.tags) do %>
+        <div>
+          <small>
+          <strong>Tags:</strong> <em><%= Enum.join(post.tags, ", ") %></em>
+          </small>
+        </div>
+      <% end %>
+    </div>
+
+    <hr>
+
+    <p>
+      <%= raw(post.description) %>
+    </p>
+
+    <p>
+      <%= live_redirect "Read more...", to: Routes.blog_path(@socket, :show, post.id) %>
+    </p>
+  </div>
+<% end %>

@@ -1,0 +1,52 @@
+<%= link to: Routes.blog_path(@socket, :index) do %>
+  all posts
+<% end %>
+
+<article id={"post-#{@post.id}"}>
+  <h1>
+    <%= @post.title %>
+  </h1>
+
+  <div>
+    <small>
+      <em>by</em>
+      <%= link to: "https://twitter.com/herminiotorres" do %>
+        <strong><%= @post.author %></strong>
+      <% end %>
+      |
+      <em>Published on</em> <strong><%= Date.to_iso8601(@post.date) %></strong> |
+      <em>Time</em> <strong><%= @post.reading_time %>m read</strong>
+    </small>
+
+    <%= if Enum.any?(@post.tags) do %>
+      <div>
+        <small>
+        <strong>Tags:</strong> <em><%= Enum.join(@post.tags, ", ") %></em>
+        </small>
+      </div>
+    <% end %>
+
+
+    <%= if @readers > 1 do %>
+      <small>
+        <strong><em>Current readers:</em></strong> <%= @readers %>
+      </small>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div id={"post-content-#{@post.id}"} phx-update="ignore">
+    <%= raw(@post.body) %>
+  </div>
+</article>
+
+<div>
+  <hr>
+  <h3>What do you think of what I said?</h3>
+  <div class="mt-4 mb-10">
+    Share with me your thoughts. You can <%= link "tweet me at @bernheisel", to: "https://twitter.com/bernheisel", class: "link" %><%= if @post.discussion_url do %>
+      or <%= link "leave a comment at GitHub", class: "link", to: @post.discussion_url %>
+    <% end %>.
+  </div>
+</div>

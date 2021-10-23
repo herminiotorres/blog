@@ -13,6 +13,7 @@ defmodule HerminioTorres.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HerminioTorres.PubSub},
       # Start the Endpoint (http/https)
+      HerminioTorresWeb.Presence,
       HerminioTorresWeb.Endpoint
       # Start a worker by calling: HerminioTorres.Worker.start_link(arg)
       # {HerminioTorres.Worker, arg}
