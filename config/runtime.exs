@@ -19,7 +19,6 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-
   config :herminio_torres, HerminioTorresWeb.Endpoint,
     server: true,
     http: [
@@ -30,7 +29,9 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],
+    url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
     secret_key_base: secret_key_base
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix
