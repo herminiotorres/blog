@@ -19,6 +19,12 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
+  host =
+    case System.get_env("APP_NAME") do
+      nil -> "herminiotorres.gigalixirapp.com"
+      sub -> "#{sub}.gigalixirapp.com"
+    end
+
   config :herminio_torres, HerminioTorresWeb.Endpoint,
     server: true,
     http: [
@@ -26,10 +32,11 @@ if config_env() == :prod do
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
       # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
       # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: String.to_integer(System.get_env("PORT") || "4000")
+      # ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: String.to_integer(System.get_env("PORT") || "4000"),
+      transport_options: [socket_opts: [:inet6]]
     ],
-    url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
+    url: [scheme: "https", host: host, port: 443],
     secret_key_base: secret_key_base
 
   # ## Using releases

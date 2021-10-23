@@ -35,9 +35,7 @@ defmodule HerminioTorres.MixProject do
     [
       {:phoenix, "~> 1.6.2"},
       {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.2"},
-      {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.5"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
@@ -49,8 +47,12 @@ defmodule HerminioTorres.MixProject do
 
       # blog
       {:nimble_publisher, "~> 0.1.2"},
-      {:makeup_elixir, "~> 0.15.2"},
-      {:makeup_erlang, "~> 0.1.1"}
+      {:makeup_elixir, ">= 0.0.0"},
+      {:makeup_erlang, ">= 0.0.0"},
+
+      # dev and test dependencies
+      {:floki, ">= 0.30.0", only: :test},
+      {:phoenix_live_reload, "~> 1.2", only: :dev}
     ]
   end
 
@@ -62,8 +64,13 @@ defmodule HerminioTorres.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      setup: ["deps.get", "cmd --cd assets npm install"],
+      "assets.deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "cmd cp -r assets/static priv",
+        "phx.digest"
+      ]
     ]
   end
 end
