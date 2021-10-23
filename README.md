@@ -1,4 +1,6 @@
-# HerminioTorres
+# HerminioTorres' Blog
+
+Link: [herminiotorres.gigalixirapp.com](https://herminiotorres.gigalixirapp.com/)
 
 To start your Phoenix server:
 
