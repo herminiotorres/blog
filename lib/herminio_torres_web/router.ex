@@ -17,8 +17,9 @@ defmodule HerminioTorresWeb.Router do
   scope "/", HerminioTorresWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    #get "/", PageController, :index
 
+    live "/", Live.BlogIndex, :index, as: :blog
     live "/blog", Live.BlogIndex, :index, as: :blog
     live "/blog/:id", Live.BlogShow, :show, as: :blog
   end
