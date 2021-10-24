@@ -1,17 +1,16 @@
-<div class="container mx-auto my-20">
+<div class="w-1/2 mx-auto">
 
-<h1 class="uppercase text-gray-500 text-10xl
-font-bold font-sans text-center">Blog</h1>
+<h1 class="uppercase text-gray-500 font-bold font-sans text-6xl mt-10">Blog</h1>
 
 <%= for post <- @posts do %>
-  <article id={"post-#{post.id}"} class="my-20">
+  <article id={"post-#{post.id}"} class="mt-10">
       <%= live_redirect to: Routes.blog_path(@socket, :show, post.id) do %>
-        <h2 class="text-pink-400 text-5xl font-semibold mb-5 font-sans">
+        <h2 class="text-pink-400 text-5xl font-semibold mb-7 font-sans">
           <%= post.title %>
         </h2>
       <% end %>
 
-  <div class="uppercase font-extralight font-sans text-2xl">
+  <div class="uppercase font-extralight font-sans">
     <small>
       <span class="italic">by</span>
       <%= link to: "https://twitter.com/herminiotorres" do %>
@@ -33,7 +32,7 @@ font-bold font-sans text-center">Blog</h1>
     <% end %>
     </div>
 
-    <p class="mt-2 text-gray-500 font-sans">
+    <p class="mt-4 mb-10 text-gray-500 font-normal text-xl font-sans prose">
       <%= raw(post.description) %>
     </p>
 
