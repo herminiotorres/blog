@@ -64,7 +64,7 @@ defmodule HerminioTorres.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "cmd --cd assets npm install"],
+      setup: ["deps.get", "cmd npm --prefix assets install"],
       "assets.deploy": [
         "cmd --cd assets npm run deploy",
         "esbuild default --minify",
