@@ -1,47 +1,55 @@
-<div class="w-1/2 mx-auto">
-
-<h1 class="uppercase text-gray-500 font-bold font-sans text-6xl mt-10">Blog</h1>
-
-<%= for post <- @posts do %>
-  <article id={"post-#{post.id}"} class="mt-10">
-      <%= live_redirect to: Routes.blog_path(@socket, :show, post.id) do %>
-        <h2 class="text-pink-400 text-5xl font-semibold mb-7 font-sans">
-          <%= post.title %>
-        </h2>
-      <% end %>
-
-  <div class="uppercase font-extralight font-sans">
-    <small>
-      <span class="italic">by</span>
-      <%= link to: "https://twitter.com/herminiotorres" do %>
-        <span class="font-bold text-white hover:text-white cursor-pointer
-        bg-indigo-300"><%= post.author %></span>
-      <% end %>
-      |
-      <em>Published on</em> <strong><%= Date.to_iso8601(post.date) %></strong> |
-      <em>Time</em> <strong><%= post.reading_time %>m read</strong>
-    </small>
-
-    <%= if Enum.any?(post.tags) do %>
-      <div>
-        <small>
-        <strong>Tags:</strong> <span class="bg-pink-300 text-white
-        font-semibold"><%= Enum.join(post.tags, ", ") %></span>
-        </small>
-      </div>
+<div class="container mx-auto">
+  <section>
+    <%= live_redirect to: Routes.blog_path(@socket, :index) do %>
+      <h1 class="mt-10 hover:text-indigo-600 uppercase font-bold font-sans text-6xl prose leading-relaxed tracking-wider">
+        Blog
+      </h1>
     <% end %>
-    </div>
+  </section>
 
-    <p class="mt-4 mb-10 text-gray-500 font-normal text-xl font-sans prose">
-      <%= raw(post.description) %>
-    </p>
+  <section class="flex flex-col space-y-10 divide-y divide-gray-300">
+    <%= for post <- @posts do %>
+      <article id={"post-#{post.id}"}>
+        <%= live_redirect to: Routes.blog_path(@socket, :show, post.id) do %>
+          <h2 class="text-2xl font-bold no-underline sm:text-4xl hover:underline mt-10 leading-relaxed">
+            <%= post.title %>
+          </h2>
+        <% end %>
 
-      <%= live_redirect to: Routes.blog_path(@socket, :show,
-      post.id) do %>
-        <span class="bg-indigo-400 px-8 py-6 text-white hover:text-white cursor-pointer shadow-md rounded-lg">
-          Read more...
-        </span>
-      <% end %>
-  </article>
-<% end %>
+        <section class="flex flex-col space-x-0 space-y-2 text-base font-normal sm:space-x-2 sm:space-y-0 sm:flex-row">
+          <p class="flex flex-row space-x-2">
+            <em class="title italic">by</em>
+            <a href="https://twitter.com/herminiotorres" target="_blank" class="font-bold text-indigo-600 hover:underline cursor-pointer">
+              <%= post.author %>
+            </a>
+          </p>
+          <p class="flex flex-row space-x-2">
+            <em class="title italic">on</em>
+            <time class="font-bold" datetime={Date.to_iso8601(post.date)}>
+              <%= Date.to_iso8601(post.date) %>
+            </time>
+          </p>
+          <p class="flex flex-row space-x-2">
+            <em class="title italic">Time</em>
+            <strong class="font-bold">
+              <%= post.reading_time %>m read
+            </strong>
+          </p>
+        </section>
+
+        <section class="flex flex-col space-x-0 space-y-2 text-base font-normal sm:space-x-2 sm:space-y-0 sm:flex-row">
+          <%= if Enum.any?(post.tags) do %>
+            <p class="flex flex-row space-x-2">
+              <em class="title italic text-xs">Tags:</em>
+              <span class="uppercase underline italic text-xs tracking-wider leading-relaxed"><%= Enum.join(post.tags, ", ") %></span>
+            </p>
+          <% end %>
+        </section>
+
+        <p class="text-lg font-medium leading-normal sm:text-2xl prose">
+          <%= raw(post.description) %>
+        </p>
+      </article>
+    <% end %>
+  </section>
 </div>

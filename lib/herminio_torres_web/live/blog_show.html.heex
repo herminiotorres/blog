@@ -1,50 +1,63 @@
-<div class="w-1/2 mx-auto">
-<%= live_redirect to: Routes.blog_path(@socket, :index) do %>
-  <span class="uppercase bg-indigo-400 inline-block mt-0 px-6 py-4 text-white
-  hover:text-white cursor-pointer shadow-md rounded-lg">
-   all posts
-  </span>
-<% end %>
+<div class="container mx-auto">
+  <section>
+    <%= live_redirect to: Routes.blog_path(@socket, :index) do %>
+      <h1 class="mt-10 hover:text-indigo-600 uppercase font-bold font-sans text-6xl prose leading-relaxed tracking-wider">
+        Blog
+      </h1>
+    <% end %>
+  </section>
 
-<article id={"post-#{@post.id}"} class="pt-10">
-  <h1 class="text-pink-400 text-5xl font-semibold mb-5 font-sans">
-    <%= @post.title %>
-  </h1>
+  <article id={"post-#{@post.id}"}>
+    <h1 class="text-2xl font-bold no-underline sm:text-4xl mt-10 leading-relaxed">
+      <%= @post.title %>
+    </h1>
+    <section class="flex flex-col space-x-0 space-y-2 text-base font-normal sm:space-x-2 sm:space-y-0 sm:flex-row">
+      <p class="flex flex-row space-x-2">
+        <em class="title italic">by</em>
+        <a href="https://twitter.com/herminiotorres" target="_blank" class="font-bold text-indigo-600 hover:underline cursor-pointer">
+          <%= @post.author %>
+        </a>
+      </p>
+      <p class="flex flex-row space-x-2">
+        <em class="title italic">on</em>
+        <time class="font-bold" datetime={Date.to_iso8601(@post.date)}>
+          <%= Date.to_iso8601(@post.date) %>
+        </time>
+      </p>
+      <p class="flex flex-row space-x-2">
+        <em class="title italic">Time</em>
+        <strong class="font-bold">
+          <%= @post.reading_time %>m read
+        </strong>
+      </p>
+    </section>
 
-  <div class="uppercase font-extralight font-sans text-xl">
-    <small>
-      <span class="italic">by</span>
-      <%= link to: "https://twitter.com/herminiotorres" do %>
-        <span class="font-bold text-white hover:text-white cursor-pointer
-        bg-indigo-300"><%= @post.author %></span>
+    <section class="flex flex-col space-x-0 space-y-2 text-base font-normal sm:space-x-2 sm:space-y-0 sm:flex-row">
+      <%= if Enum.any?(@post.tags) do %>
+        <p class="flex flex-row space-x-2">
+          <em class="title italic text-xs">Tags:</em>
+          <span class="uppercase underline italic text-xs tracking-wider leading-relaxed">
+          <%= Enum.join(@post.tags, ", ") %>
+          </span>
+        </p>
       <% end %>
-      |
-      <em>Published on</em> <strong><%= Date.to_iso8601(@post.date) %></strong> |
-      <em>Time</em> <strong><%= @post.reading_time %>m read</strong>
-    </small>
+    </section>
 
-    <%= if Enum.any?(@post.tags) do %>
-      <div>
-        <small>
-        <strong>Tags:</strong> <span class="bg-pink-300 text-white
-        font-semibold"><%= Enum.join(@post.tags, ", ") %></span>
-        </small>
+    <section class="flex flex-col space-x-0 space-y-2 text-base font-normal sm:space-x-2 sm:space-y-0 sm:flex-row">
+      <%= if @readers > 1 do %>
+        <p class="flex flex-row space-x-2">
+          <em class="title italic text-xs">Current readers:</em>
+          <span class="uppercase underline italic text-xs tracking-wider leading-relaxed">
+            <%= @readers %>
+          </span>
+        </p>
+      <% end %>
+    </section>
+
+    <section id={"post-content-#{@post.id}"} phx-update="ignore" phx-hook="Highlight">
+      <div class="mt-6 text-lg markdown text-gray-700 tracking-wide leading-relaxed prose">
+        <%= raw(@post.body) %>
       </div>
-    <% end %>
-
-
-    <%= if @readers > 1 do %>
-      <small>
-        <strong><em>Current readers:</em></strong> <%= @readers %>
-      </small>
-    <% end %>
-  </div>
-
-  <div id={"post-content-#{@post.id}"} phx-update="ignore"  phx-hook="Highlight" >
-    <div class="mt-14 text-gray-800 font-sans font-normal text-xl
-    tracking-wide leading-relaxed prose">
-      <%= raw(@post.body) %>
-    </div>
-  </div>
-</article>
+    </section>
+  </article>
 </div>
