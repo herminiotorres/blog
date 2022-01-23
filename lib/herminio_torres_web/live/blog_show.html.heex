@@ -40,7 +40,7 @@
     <% end %>
   </div>
 
-  <div id={"post-content-#{@post.id}"} phx-update="ignore">
+  <div id={"post-content-#{@post.id}"} phx-update="ignore"  phx-hook="Highlight" >
     <div class="mt-14 text-gray-800 font-sans font-normal text-xl
     tracking-wide leading-relaxed prose">
       <%= raw(@post.body) %>

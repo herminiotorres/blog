@@ -31,13 +31,13 @@ looking to my blog post.
 
 First, you will need to create a `package.json`, and this file will manage your front-end dependencies, versions, and many other things. And how we can do that? So let go start!
 
-```elixir
+```shell
 npm init -y
 ```
 
 After init our project and creating the `package.json`, this is the output:
 
-```elixir
+```js
 // package.json
 {
   "name": "learn-tailwindcss",
@@ -55,13 +55,13 @@ After init our project and creating the `package.json`, this is the output:
 
 After generating our `package.json`, we should install some dependencies to our project, and we will install these dependencies here:
 
-```elixir
+```shell
 npm install tailwindcss postcss postcss-loader postcss-import postcss-nested autoprefixer
 ```
 
 And our `package.json` will be this way:
 
-```elixir
+```js
 // package.json
 {
   "name": "learn-tailwindcss",
@@ -87,13 +87,13 @@ And our `package.json` will be this way:
 
 After installing all dependencies we need, like Tailwind CSS, PostCSS, and Autoprefixer. Now we can create the TailwindCss and PostCSS config files, like this:
 
-```elixir
+```shell
 npx tailwindcss init -p
 ```
 
 This command, it will generate two files for us, `tailwind.config.js` and `postcss.config.js`. And for our project these both files will be like this:
 
-```elixir
+```js
 // tailwind.conf.js
 module.exports = {
   purge: [],
@@ -110,15 +110,14 @@ module.exports = {
 
 We intend to use the `jit` mode and purge some files into the `tailwind.conf.js`, and after we change, the results will be like this:
 
-```elixir
+```js
 // tailwind.conf.js
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './public/**/*.{html,js}',
     './public/index.html'
   ],
-  darkMode: false, // or 'media' or 'class'
+  // darkMode: 'media' or 'class'
   theme: {
     extend: {},
   },
@@ -131,7 +130,7 @@ module.exports = {
 
 And for the `postcss.conf.js`, this is after we generate:
 
-```elixir
+```js
 // postcss.conf.js
 module.exports = {
   plugins: {
@@ -143,7 +142,7 @@ module.exports = {
 
 And we will apply some changes here, and the final result will be like this way:
 
-```elixir
+```js
 // postcss.conf.js
 module.exports = {
   plugins: {
@@ -165,7 +164,7 @@ delete the `"test"` `"scripts"` for `"build:css"`.
 
 Before:
 
-```elixir
+```js
 // package.json
 "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1"
@@ -174,7 +173,7 @@ Before:
 
 After:
 
-```elixir
+```js
 // package.json
 "scripts": {
   "build:css": "tailwindcss --postcss --minify -i assets/css/app.css -o public/app.css -w"
@@ -183,7 +182,7 @@ After:
 
 And it is essential to quick a look at how our project is structured, so take a look:
 
-```elixir
+```shell
 .
 ├── package.json
 ├── tailwind.config.js
@@ -198,7 +197,7 @@ And it is essential to quick a look at how our project is structured, so take a 
 
 And in `assets/css/app.css`, we will `@import` our TailwindCSS files. Here:
 
-```elixir
+```css
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -206,7 +205,7 @@ And in `assets/css/app.css`, we will `@import` our TailwindCSS files. Here:
 
 And our `public/index.html` is a nice boilerplate, like this:
 
-```elixir
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -223,18 +222,19 @@ And our `public/index.html` is a nice boilerplate, like this:
 
 And for the last piece for this article, we will be running the `build:css`, with a `Python` `http-server`, on the root path to our project, run this:
 
-```elixir
+```shell
 npm run build:css
 ```
 
 And for the `Python` `http-server`, we go into the `public` folder and run:
 
-```elixir
+```shell
 cd public
 public$ python -m http.server
 ```
 
-### References:
+References:
+
 
 - [TailwindCSS - Boilerplate](https://github.com/herminiotorres/tailwind-boilerplate)
 - [Elixirschool - Libraries - NimblerPublisher](https://elixirschool.com/en/lessons/libraries/nimble-publisher/)

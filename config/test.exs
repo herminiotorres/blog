@@ -7,10 +7,6 @@ config :herminio_torres, HerminioTorresWeb.Endpoint,
   secret_key_base: "ifXdvbeW9cQ8CjvdH1eOFeSNs20y+O6ki/a/g/eXjWy1f1QZZiESU8rtkeFx4WnJ",
   server: false
 
-# In test we don't send emails.
-config :herminio_torres, HerminioTorres.Mailer,
-  adapter: Swoosh.Adapters.Test
-
 # Print only warnings and errors during test
 config :logger, level: :warn
 

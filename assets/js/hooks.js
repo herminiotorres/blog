@@ -1,4 +1,4 @@
-import "./highlighter";
+import "./highlighter.js"
 
 let Hooks = {};
 

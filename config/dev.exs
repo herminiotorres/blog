@@ -56,9 +56,9 @@ config :herminio_torres, HerminioTorresWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
       ~r"lib/herminio_torres_web/(live|views)/.*(ex)$",
-      ~r"lib/herminio_torres_web/templates/.*(eex)$"
+      ~r"lib/herminio_torres_web/templates/.*(eex)$",
+      ~r"priv/posts/.*(md)$"
     ]
   ]
 

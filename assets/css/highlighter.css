@@ -1,6 +1,4 @@
-.prose pre {
-  @apply bg-gray-50;
-}
+/* HIGHLIGHT */
 
 .makeup .hll {background-color: #ffffcc}
 .makeup {
@@ -77,7 +75,6 @@
 .makeup .vg {color: #000000; } /* :name_variable_global */
 .makeup .vi {color: #000000; } /* :name_variable_instance */
 .makeup .vm {color: #000000; } /* :name_variable_magic */
-
 
 
 /*

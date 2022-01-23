@@ -22,7 +22,6 @@ defmodule HerminioTorresWeb do
       use Phoenix.Controller, namespace: HerminioTorresWeb
 
       import Plug.Conn
-      import HerminioTorresWeb.Gettext
       alias HerminioTorresWeb.Router.Helpers, as: Routes
     end
   end
@@ -72,7 +71,6 @@ defmodule HerminioTorresWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HerminioTorresWeb.Gettext
     end
   end
 
@@ -88,7 +86,6 @@ defmodule HerminioTorresWeb do
       import Phoenix.View
 
       import HerminioTorresWeb.ErrorHelpers
-      import HerminioTorresWeb.Gettext
       alias HerminioTorresWeb.Router.Helpers, as: Routes
     end
   end
