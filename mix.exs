@@ -47,6 +47,8 @@ defmodule HerminioTorres.MixProject do
       {:nimble_publisher, "~> 0.1.2"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
+      {:earmark, "1.4.19"},
+      {:earmark_parser, "1.4.17", override: true},
 
       # dev and test dependencies
       {:floki, ">= 0.30.0", only: :test},
